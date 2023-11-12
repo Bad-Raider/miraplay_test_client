@@ -18,11 +18,11 @@ const RegisterForm = () => {
                     marginBottom: '40px',
                 }}
             >
-                Sigh in{' '}
+                Реєстрація{' '}
             </h2>
             <TextField
                 id="outlined-basic"
-                label="Name"
+                label="ВАШЕ ІМ'Я"
                 variant="outlined"
                 type="text"
                 name="name"
@@ -52,7 +52,7 @@ const RegisterForm = () => {
             />
             <TextField
                 id="outlined-basic"
-                label="Email"
+                label="ВВЕДІТЬ ВАШ EMAIL "
                 variant="outlined"
                 type="email"
                 name="email"
@@ -82,7 +82,7 @@ const RegisterForm = () => {
             />
             <TextField
                 id="outlined-basic"
-                label="Password"
+                label="ВАШ ПАРОЛЬ"
                 variant="outlined"
                 type="password"
                 name="password"

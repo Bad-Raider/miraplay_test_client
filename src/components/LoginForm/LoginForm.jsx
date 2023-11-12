@@ -18,12 +18,12 @@ const LoginForm = () => {
                     marginBottom: '40px',
                 }}
             >
-                Log in{' '}
+                Вхід{' '}
             </h2>
 
             <TextField
                 id="outlined-basic"
-                label="Email"
+                label="ВВЕДІТЬ СВІЙ EMAIL"
                 variant="outlined"
                 type="email"
                 name="email"
@@ -54,7 +54,7 @@ const LoginForm = () => {
             />
             <TextField
                 id="outlined-basic"
-                label="Password"
+                label="ВАШ ПАРОЛЬ"
                 variant="outlined"
                 type="password"
                 name="password"
