@@ -1,8 +1,10 @@
+import CardList from "../components/CardList/CardList";
+
 const GamesPage = ()=>{
 
-    return (
-        <div>GamesPage</div>
-    )
+    return <CardList/>
+
 }
+
 
 export default GamesPage;
