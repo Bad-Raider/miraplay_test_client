@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 const drawerWidth = 240;
 const navItems = [
     { label: 'Головна', path: '/' },
-    { label: 'Логін', path: '/login' },
+    { label: 'Вхід', path: '/login' },
     { label: 'Реєстрація', path: '/register' },
     { label: 'Ігри', path: '/games' },
 ];
