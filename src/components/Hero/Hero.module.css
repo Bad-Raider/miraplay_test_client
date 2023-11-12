@@ -1,0 +1,68 @@
+.Wraper {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.WraperInfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.Title {
+    display: flex;
+    font-size: 48px;
+    font-weight: 100;
+    line-height: 125%;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    margin-bottom: 40px;
+}
+
+.Span {
+    font-weight: 900;
+}
+
+.Button {
+    background: var(--main-green-color);
+    border: none;
+    border-color: var(--main-green-color);
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(63, 156, 20, 0.3);
+    color: #eaeaea;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 800;
+    height: 78px;
+    line-height: 1.43;
+    margin-left: 7px;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-transform: skew(-10deg);
+    transform: skew(-10deg);
+    transition: all 0.2s ease-in-out;
+    width: 274px;
+    margin-top: 40px;
+}
+
+.Img{
+    display: none;
+} 
+
+@media screen and (min-width: 1440px) {
+    .Img {
+        display: block;
+    }
+}
+
+
+
+

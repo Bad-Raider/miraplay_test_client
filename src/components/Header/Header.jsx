@@ -54,9 +54,9 @@ const Header = () => {
     );
 
     return (
-        <Box sx={{ display: 'flex', height: '64px' }}>
+        <Box sx={{ display: 'flex', height: '64px', marginBottom: '50px' }}>
             <CssBaseline />
-            <AppBar component="nav" style={{ background: '#1d1d1d' }}>
+            <AppBar component="nav" style={{ background: '#1d1d1d',  }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
