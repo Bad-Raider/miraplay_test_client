@@ -1,10 +1,46 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+// import Swal from 'sweetalert2';
+ 
 
 const RegisterForm = () => {
+    // const [dispatch, { isLoading }] = useSignupMutation();
+    // const [login] = useSigninMutation();
+
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     const form = e.currentTarget;
+    //     const name = form.elements.name.value;
+    //     const email = form.elements.email.value.toLowerCase();
+    //     const password = form.elements.password.value;  
+        
+    //     dispatch({
+    //         name: name,
+    //         email: email,
+    //         password: password,
+    //     })
+    //         .unwrap()
+    //         .then(() => {
+    //             login({
+    //                 email,
+    //                 password,
+    //             })
+    //                 .unwrap()
+    //                 .then(() => {
+    //                     form.reset();
+    //                 });
+    //         });
+    // };
+
+    // if (isLoading) {
+    //     return <Navigate to="/" replace />;
+    // }
+
     return (
+        // isLoading ? <h1>Loading...</h1>:
         <form
+            // onSubmit={handleSubmit}
             style={{
                 maxWidth: '500px',
                 padding: '15px',
@@ -21,7 +57,7 @@ const RegisterForm = () => {
                 Реєстрація{' '}
             </h2>
             <TextField
-                id="outlined-basic"
+                id="outlined-basic-name"
                 label="ВАШЕ ІМ'Я"
                 variant="outlined"
                 type="text"
@@ -51,7 +87,7 @@ const RegisterForm = () => {
                 }}
             />
             <TextField
-                id="outlined-basic"
+                id="outlined-basic-email"
                 label="ВВЕДІТЬ ВАШ EMAIL "
                 variant="outlined"
                 type="email"
@@ -81,7 +117,7 @@ const RegisterForm = () => {
                 }}
             />
             <TextField
-                id="outlined-basic"
+                id="outlined-basic-password"
                 label="ВАШ ПАРОЛЬ"
                 variant="outlined"
                 type="password"
