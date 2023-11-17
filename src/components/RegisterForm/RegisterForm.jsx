@@ -1,25 +1,25 @@
+import {useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { useRegistrMutation } from '../../redux/authApi';
-import { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useRegisterMutation } from '../../redux/authApi';
 
 const RegisterForm = () => {
-    // const defaultData = {
-    //     name: '',
-    //     email: '',
-    //     password: '',
-    // };
 
-    // const [dataForm, setDataForm] = useState(defaultData);
-
-    const [registr, { isLoading }] = useRegistrMutation();
+    const navigate = useNavigate();
+    const [registr] = useRegisterMutation();
+    const iconForSwal = { error: 'error', success: 'success' };
+    const messageForSwal = {
+        409: 'Email was trying',
+        400: 'Please, try again!',
+        201: 'Registration completed successfully!',
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.currentTarget;
-        console.log(form);
+        
         registr({
             name: form.elements.name.value,
             email: form.elements.email.value,
@@ -27,24 +27,30 @@ const RegisterForm = () => {
         })
             .unwrap()
             .then(res => {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: `Registration completed successfully !`,
-                    showConfirmButton: false,
-                    timer: 1200,
-                });
+                successOrError(iconForSwal.success, messageForSwal[201]);
+                navigate('/games');
             })
             .catch(e => {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: `Please, try again!`,
-                    showConfirmButton: false,
-                    timer: 1200,
-                });
+                console.log('e.originalStatus', e.originalStatus);
+                if (e.originalStatus === 409) {
+                    return successOrError(
+                        iconForSwal.error,
+                        messageForSwal[409]
+                    );
+                }
+                successOrError(iconForSwal.error, messageForSwal[400]);
             });
         form.reset();
+    };
+
+    const successOrError = (icon, message) => {
+        Swal.fire({
+            position: 'center',
+            icon: `${icon}`,
+            text: `${message}`,
+            showConfirmButton: false,
+            timer: 1200,
+        });
     };
 
     return (
@@ -131,6 +137,8 @@ const RegisterForm = () => {
                 variant="outlined"
                 type="password"
                 name="password"
+                pattern="^(?=.*[A-Z])[a-zA-Z0-9]{6,30}$"
+                title="Пароль повинен містити від 6 до 30 символів, включаючи принаймні одну велику літеру та цифри."
                 required
                 sx={{
                     width: '100%',
