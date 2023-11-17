@@ -27,7 +27,7 @@ const LoginForm = () => {
             </h2>
 
             <TextField
-                id="outlined-basic"
+                id="email"
                 label="ВВЕДІТЬ СВІЙ EMAIL"
                 variant="outlined"
                 type="email"
@@ -57,7 +57,7 @@ const LoginForm = () => {
                 }}
             />
             <TextField
-                id="outlined-basic"
+                id="password"
                 label="ВАШ ПАРОЛЬ"
                 variant="outlined"
                 type="password"

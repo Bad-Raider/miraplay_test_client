@@ -3,21 +3,48 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { useRegistrMutation } from '../../redux/authApi';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const RegisterForm = () => {
-    const defaultData = {
-        name: '',
-        email: '',
-        password: '',
-    };
+    // const defaultData = {
+    //     name: '',
+    //     email: '',
+    //     password: '',
+    // };
 
-    const [dataForm, setDataForm] = useState(defaultData);
+    // const [dataForm, setDataForm] = useState(defaultData);
 
-    const [registr] = useRegistrMutation();
+    const [registr, { isLoading }] = useRegistrMutation();
 
     const handleSubmit = e => {
         e.preventDefault();
-        // const
+        const form = e.currentTarget;
+        console.log(form);
+        registr({
+            name: form.elements.name.value,
+            email: form.elements.email.value,
+            password: form.elements.password.value,
+        })
+            .unwrap()
+            .then(res => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: `Registration completed successfully !`,
+                    showConfirmButton: false,
+                    timer: 1200,
+                });
+            })
+            .catch(e => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: `Please, try again!`,
+                    showConfirmButton: false,
+                    timer: 1200,
+                });
+            });
+        form.reset();
     };
 
     return (
@@ -39,7 +66,7 @@ const RegisterForm = () => {
                 Реєстрація{' '}
             </h2>
             <TextField
-                id="outlined-basic-name"
+                id="name"
                 label="ВАШЕ ІМ'Я"
                 variant="outlined"
                 type="text"
@@ -69,7 +96,7 @@ const RegisterForm = () => {
                 }}
             />
             <TextField
-                id="outlined-basic-email"
+                id="email"
                 label="ВВЕДІТЬ ВАШ EMAIL "
                 variant="outlined"
                 type="email"
@@ -99,7 +126,7 @@ const RegisterForm = () => {
                 }}
             />
             <TextField
-                id="outlined-basic-password"
+                id="password"
                 label="ВАШ ПАРОЛЬ"
                 variant="outlined"
                 type="password"

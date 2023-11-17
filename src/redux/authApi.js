@@ -17,7 +17,7 @@ export const authApi = createApi({
     registr: builder.mutation({
       query: dataUsers => ({
         body: dataUsers,
-        url: 'users/registr',
+        url: 'users/register',
         method: 'POST',
       }),
     }),
