@@ -1,14 +1,15 @@
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from 'sweetalert2';
 import { useRegisterMutation } from '../../redux/authApi';
+import { setUser } from '../../redux/userSlice';
 
 const RegisterForm = () => {
-
     const navigate = useNavigate();
-    const [registr] = useRegisterMutation();
+    const [dispatch] = useRegisterMutation();
+
     const iconForSwal = { error: 'error', success: 'success' };
     const messageForSwal = {
         409: 'Email was trying',
@@ -19,14 +20,22 @@ const RegisterForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.currentTarget;
-        
-        registr({
-            name: form.elements.name.value,
-            email: form.elements.email.value,
+        const name = form.elements.name.value;
+        const email = form.elements.email.value;
+
+        dispatch({
+            name,
+            email,
             password: form.elements.password.value,
         })
             .unwrap()
             .then(res => {
+                console.log('name', name);
+                console.log('email', email);
+                setUser({
+                    name,
+                    email,
+                });
                 successOrError(iconForSwal.success, messageForSwal[201]);
                 navigate('/games');
             })
