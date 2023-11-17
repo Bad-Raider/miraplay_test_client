@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { setUser } from '../../redux/userSlice.js';
+import { messageForSwal } from '../../helpers/messageForSwal.js'; 
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -14,11 +15,6 @@ const LoginForm = () => {
     const [dispatchLogin] = useLoginMutation();
 
     const iconForSwal = { error: 'error', success: 'success' };
-    const messageForSwal = {
-        409: 'Email was trying',
-        400: 'Please, try again!',
-        201: 'Registration completed successfully!',
-    };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -38,8 +34,7 @@ const LoginForm = () => {
                         email,
                     })
                 );
-                
-                successOrError(iconForSwal.success, messageForSwal[201]);
+                successOrError(iconForSwal.success, messageForSwal[200]);
                 navigate('/');
             })
             .catch(e => {

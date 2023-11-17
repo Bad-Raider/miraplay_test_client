@@ -4,20 +4,16 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from 'sweetalert2';
 import { useRegisterMutation } from '../../redux/authApi';
-import { setUser } from '../../redux/userSlice';
-import { useDispatch } from 'react-redux';
+// import { setUser } from '../../redux/userSlice';
+// import { useDispatch } from 'react-redux';
+import { messageForSwal } from '../../helpers/messageForSwal';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [dispatchRegister] = useRegisterMutation();
 
     const iconForSwal = { error: 'error', success: 'success' };
-    const messageForSwal = {
-        409: 'Email was trying',
-        400: 'Please, try again!',
-        201: 'Registration completed successfully!',
-    };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -33,14 +29,14 @@ const RegisterForm = () => {
         })
             .unwrap()
             .then(res => {
-                console.log('res', res);
-                dispatch(
-                    setUser({
-                        name,
-                        email,
-                        password,
-                    })
-                );
+                // console.log('res', res);
+                // dispatch(
+                //     setUser({
+                //         name,
+                //         email,
+                //         password,
+                //     })
+                // );
                 successOrError(iconForSwal.success, messageForSwal[201]);
                 navigate('/');
             })
