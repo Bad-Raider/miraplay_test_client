@@ -1,39 +1,14 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-// import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { setCredential } from '../../redux/authSlice';
-// import { useLoginMutation } from '../../redux/authApiSlice';
 import { useLoginMutation } from '../../redux/authApi.js';
 
 const LoginForm = () => {
 
-    const {data, error, isLoading}= useLoginMutation()
+    const [login]= useLoginMutation()
 
-    console.log('data', isLoading);
-    // const navigate = useNavigate();
-
-    // const [login, { isLoading }] = useLoginMutation();
-    // const dispatch = useDispatch();
-
-    // const handleSubmit = async e => {
-    //     e.preventDefault();
-    //     const form = e.currentTarget;
-    //     const email = form.elements.email.value.toLowerCase();
-    //     const password = form.elements.password.value;
-
-    //     try {
-    //         const userData = await login({ email, password }).unwrap();
-    //         dispatch(setCredential({ ...userData, email }));
-    //         // navigate('/')
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
 
     return (
-        // isLoading ? <h1>Loading...</h1>:
         <form
             style={{
                 maxWidth: '500px',
@@ -42,7 +17,6 @@ const LoginForm = () => {
                 marginLeft: 'auto',
             }}
             autoComplete="off"
-            // onSubmit={handleSubmit}
         >
             <h2
                 style={{

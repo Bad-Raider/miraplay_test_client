@@ -1,46 +1,27 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-// import Swal from 'sweetalert2';
- 
+import { useRegistrMutation } from '../../redux/authApi';
+import { useState } from 'react';
 
 const RegisterForm = () => {
-    // const [dispatch, { isLoading }] = useSignupMutation();
-    // const [login] = useSigninMutation();
+    const defaultData = {
+        name: '',
+        email: '',
+        password: '',
+    };
 
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     const form = e.currentTarget;
-    //     const name = form.elements.name.value;
-    //     const email = form.elements.email.value.toLowerCase();
-    //     const password = form.elements.password.value;  
-        
-    //     dispatch({
-    //         name: name,
-    //         email: email,
-    //         password: password,
-    //     })
-    //         .unwrap()
-    //         .then(() => {
-    //             login({
-    //                 email,
-    //                 password,
-    //             })
-    //                 .unwrap()
-    //                 .then(() => {
-    //                     form.reset();
-    //                 });
-    //         });
-    // };
+    const [dataForm, setDataForm] = useState(defaultData);
 
-    // if (isLoading) {
-    //     return <Navigate to="/" replace />;
-    // }
+    const [registr] = useRegistrMutation();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        // const
+    };
 
     return (
-        // isLoading ? <h1>Loading...</h1>:
         <form
-            // onSubmit={handleSubmit}
             style={{
                 maxWidth: '500px',
                 padding: '15px',
@@ -48,6 +29,7 @@ const RegisterForm = () => {
                 marginLeft: 'auto',
             }}
             autoComplete="off"
+            onSubmit={handleSubmit}
         >
             <h2
                 style={{
