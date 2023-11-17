@@ -2,11 +2,68 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { useLoginMutation } from '../../redux/authApi.js';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { setUser } from '../../redux/userSlice.js';
 
 const LoginForm = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [login]= useLoginMutation()
+    const [dispatchLogin] = useLoginMutation();
 
+    const iconForSwal = { error: 'error', success: 'success' };
+    const messageForSwal = {
+        409: 'Email was trying',
+        400: 'Please, try again!',
+        201: 'Registration completed successfully!',
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const email = form.elements.email.value;
+        const password = form.elements.password.value;
+
+        dispatchLogin({
+            email,
+            password,
+        })
+            .unwrap()
+            .then(res => {
+                dispatch(
+                    setUser({
+                        token: res.token,
+                        email,
+                    })
+                );
+                
+                successOrError(iconForSwal.success, messageForSwal[201]);
+                navigate('/');
+            })
+            .catch(e => {
+                console.log('e.originalStatus', e.originalStatus);
+                if (e.originalStatus === 409) {
+                    return successOrError(
+                        iconForSwal.error,
+                        messageForSwal[409]
+                    );
+                }
+                successOrError(iconForSwal.error, messageForSwal[400]);
+            });
+        form.reset();
+    };
+
+    const successOrError = (icon, message) => {
+        Swal.fire({
+            position: 'center',
+            icon: `${icon}`,
+            text: `${message}`,
+            showConfirmButton: false,
+            timer: 1200,
+        });
+    };
 
     return (
         <form
@@ -17,6 +74,7 @@ const LoginForm = () => {
                 marginLeft: 'auto',
             }}
             autoComplete="off"
+            onSubmit={handleSubmit}
         >
             <h2
                 style={{

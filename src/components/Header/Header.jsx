@@ -14,17 +14,23 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
-const drawerWidth = 240;
-const navItems = [
-    { label: 'Головна', path: '/' },
-    { label: 'Вхід', path: '/login' },
-    { label: 'Реєстрація', path: '/register' },
-    { label: 'Ігри', path: '/games' },
-];
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+
+    const drawerWidth = 240;
+
+    const navItems = [
+        { label: 'Головна', path: '/' },
+        { label: 'Вхід', path: '/login' },
+        { label: 'Реєстрація', path: '/register' },
+        { label: 'Ігри', path: '/games' },
+    ];
+    const filteredNavItems = isLoggedIn
+    ? navItems.filter(item => item.label === 'Головна' || item.label === 'Ігри')
+    : navItems;
 
     const handleDrawerToggle = () => {
         setMobileOpen(prevState => !prevState);
@@ -38,10 +44,10 @@ const Header = () => {
             <Divider sx={{ borderColor: '#3f9c14' }} />
             <Divider sx={{ borderColor: '#3f9c14' }} />
             <List>
-                {navItems.map(item => (
+                {filteredNavItems.map(item => (
                     <ListItem key={item.label} disablePadding>
                         <ListItemButton
-                            sx={{ textAlign: 'center', }}
+                            sx={{ textAlign: 'center' }}
                             component={Link}
                             to={item.path}
                         >
@@ -56,7 +62,7 @@ const Header = () => {
     return (
         <Box sx={{ display: 'flex', height: '64px', marginBottom: '50px' }}>
             <CssBaseline />
-            <AppBar component="nav" style={{ background: '#1d1d1d',  }}>
+            <AppBar component="nav" style={{ background: '#1d1d1d' }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -80,10 +86,10 @@ const Header = () => {
                         Miraplay
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        {navItems.map(item => (
+                        {filteredNavItems.map(item => (
                             <Button
                                 key={item.label}
-                                sx={{ color: '#fff',   }}
+                                sx={{ color: '#fff' }}
                                 component={Link}
                                 to={item.path}
                             >

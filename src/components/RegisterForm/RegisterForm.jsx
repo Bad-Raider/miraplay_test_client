@@ -5,10 +5,12 @@ import SendIcon from '@mui/icons-material/Send';
 import Swal from 'sweetalert2';
 import { useRegisterMutation } from '../../redux/authApi';
 import { setUser } from '../../redux/userSlice';
+import { useDispatch } from 'react-redux';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [dispatch] = useRegisterMutation();
+    const dispatch = useDispatch();
+    const [dispatchRegister] = useRegisterMutation();
 
     const iconForSwal = { error: 'error', success: 'success' };
     const messageForSwal = {
@@ -22,22 +24,25 @@ const RegisterForm = () => {
         const form = e.currentTarget;
         const name = form.elements.name.value;
         const email = form.elements.email.value;
+        const password = form.elements.password.value;
 
-        dispatch({
+        dispatchRegister({
             name,
             email,
-            password: form.elements.password.value,
+            password,
         })
             .unwrap()
             .then(res => {
-                console.log('name', name);
-                console.log('email', email);
-                setUser({
-                    name,
-                    email,
-                });
+                console.log('res', res);
+                dispatch(
+                    setUser({
+                        name,
+                        email,
+                        password,
+                    })
+                );
                 successOrError(iconForSwal.success, messageForSwal[201]);
-                navigate('/games');
+                navigate('/');
             })
             .catch(e => {
                 console.log('e.originalStatus', e.originalStatus);
