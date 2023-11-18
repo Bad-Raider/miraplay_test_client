@@ -2,9 +2,12 @@ import { ganres } from '../../helpers/gamesGanres';
 import css from './TitleGamesList.module.css';
 
 const TitleGamesList = ({ handleClick }) => {
+    
+    
     const handleGenreClick = genre => {
         handleClick(genre);
     };
+
 
     return (
         <>
@@ -23,6 +26,7 @@ const TitleGamesList = ({ handleClick }) => {
                     );
                 })}
             </ul>
+
         </>
     );
 };

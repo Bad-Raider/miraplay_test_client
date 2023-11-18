@@ -1,13 +1,13 @@
-export const fetchGames = async genre => {
+export const fetchGames = async (genre, page ) => {
     const response = await fetch('https://api.miraplay.cloud/games/by_page', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            page: 0,
+            page: page,
             isFreshGamesFirst: true,
-            genre: genre.toUpperCase(), // Переконайтеся, що жанр у верхньому регістрі
+            genre: genre.toUpperCase(),
             gamesToShow: 9,
         }),
     });
@@ -15,6 +15,6 @@ export const fetchGames = async genre => {
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
-    
+
     return response.json();
 };

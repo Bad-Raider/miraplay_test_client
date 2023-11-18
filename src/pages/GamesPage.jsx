@@ -1,25 +1,56 @@
+import { useQuery } from 'react-query';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from '../components/Container/Container';
 import CardList from '../components/CardList/CardList';
 import TitleGamesList from '../components/TitleGamesList/TitleGamesList';
-import { useState } from 'react';
 import { fetchGames } from '../helpers/fetchGames';
-import { useQuery } from 'react-query';
+import { setGames, setGenre } from '../redux/gamesSlice';
+import css from '../components/TitleGamesList/TitleGamesList.module.css';
 
 const GamesPage = () => {
-    const [selectedGenre, setSelectedGenre] = useState(null);
+    const gamesListLength = useSelector(state => state.games.gamesListLength);
+    const dispatch = useDispatch();
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [page, setPage] = useState(1);
     const { isLoading, isError, data } = useQuery(
         ['games', selectedGenre],
-        () => (selectedGenre ? fetchGames(selectedGenre) : null)
+        () => (selectedGenre ? fetchGames(selectedGenre, page) : null)
     );
-    console.log(data);
+
+    let totalPages = Math.ceil(gamesListLength / 9);
+
+    useEffect(() => {
+        dispatch(setGames(data));
+        dispatch(setGenre(selectedGenre));
+    }, [dispatch, data, selectedGenre]);
+
     const handleClick = genre => {
         setSelectedGenre(genre);
+        setPage(1);
     };
+
+    const handleLoadMore = async () => {
+        const newData = await fetchGames(selectedGenre, page + 1);
+        dispatch(setGames(newData));
+        setPage(page + 1);
+    };
+
     return (
         <section>
             <Container>
                 <TitleGamesList handleClick={handleClick} />
-                <CardList error={isError} load={isLoading} data={data ? data : []} />
+                <CardList error={isError} load={isLoading} />
+                <button
+                    className={css.GanreItems}
+                    onClick={handleLoadMore}
+                    style={{
+                        display: page >= totalPages ? 'none' : 'flex',
+                        margin: '0 auto 0',
+                    }}
+                >
+                    Завантажити ще...
+                </button>
             </Container>
         </section>
     );
