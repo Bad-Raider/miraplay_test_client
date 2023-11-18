@@ -29,8 +29,8 @@ const Header = () => {
         { label: 'Ігри', path: '/games' },
     ];
     const filteredNavItems = isLoggedIn
-    ? navItems.filter(item => item.label === 'Головна' || item.label === 'Ігри')
-    : navItems;
+    ? navItems
+    : navItems.filter(item => item.label === 'Головна' || item.label === 'Вхід'|| item.label === 'Реєстрація' )
 
     const handleDrawerToggle = () => {
         setMobileOpen(prevState => !prevState);
