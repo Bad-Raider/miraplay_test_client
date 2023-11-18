@@ -19,7 +19,7 @@ const GamesPage = () => {
         <section>
             <Container>
                 <TitleGamesList handleClick={handleClick} />
-                <CardList />
+                <CardList error={isError} load={isLoading} data={data ? data : []} />
             </Container>
         </section>
     );

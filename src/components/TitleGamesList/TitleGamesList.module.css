@@ -32,6 +32,6 @@
     border-radius: 10px;
 }
 
-.active{
+.GanreItems:hover{
   background-color: var(--main-green-color);
 }
