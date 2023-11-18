@@ -1,12 +1,12 @@
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { useLoginMutation } from '../../redux/authApi.js';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { setUser } from '../../redux/userSlice.js';
 import { messageForSwal } from '../../helpers/messageForSwal.js'; 
+import { useLoginMutation } from '../../redux/authApi.js';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -38,7 +38,6 @@ const LoginForm = () => {
                 navigate('/');
             })
             .catch(e => {
-                console.log('e.originalStatus', e.originalStatus);
                 if (e.originalStatus === 409) {
                     return successOrError(
                         iconForSwal.error,
