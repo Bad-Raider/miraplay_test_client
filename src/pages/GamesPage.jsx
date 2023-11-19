@@ -46,6 +46,7 @@ const GamesPage = () => {
                             display: 'flex',
                             justifyContent: 'spaceAround',
                             marginTop: '50px',
+                            marginBottom: '50px',
                             fontSize: '30px',
                         }}
                     >
