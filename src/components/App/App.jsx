@@ -7,12 +7,11 @@ import Games from '../../pages/GamesPage';
 import LoginPage from '../../pages/LoginPage';
 import RegisterPage from '../../pages/RegisterPage';
 import ErrorPage from '../../pages/ErrorPage';
-// import PrivateRoute from './PrivateRoute';
-// import PublicRoute from './PublicRoute';
+// import PrivateRoute from '../../PrivateRoute.jsx';
+// import PublicRoute from '../../PablicPoute.jsx';
 // import { refreshUser } from "redux/auth/operationsAuth";
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../../helpers/mateialUiFontFamila.js'
-;
+import theme from '../../helpers/mateialUiFontFamila.js';
 const App = () => {
     // const dispatch = useDispatch();
 
@@ -22,36 +21,36 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-        <Routes>
-            <Route element={<SharedLayout />}>
-                <Route index element={<HomePage />} />
-                <Route
-                    path="login"
-                    element={
-                        // <PublicRoute>
-                            <LoginPage />
-                        // </PublicRoute>
-                    }
-                />
-                <Route
-                    path="register"
-                    element={
-                        // <PublicRoute>
-                            <RegisterPage />
-                        // </PublicRoute>
-                    }
-                />
-                <Route
-                    path="games"
-                    element={
-                        // <PrivateRoute>
+            <Routes>
+                <Route element={<SharedLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route
+                        path="login"
+                        element={
+                            // <PublicRoute>
+                                <LoginPage />
+                            // </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="register"
+                        element={
+                            // <PublicRoute>
+                                <RegisterPage />
+                            // </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="games"
+                        element={
+                            // <PrivateRoute>
                             <Games />
-                        // </PrivateRoute>
-                    }
-                />
-                <Route path="*" element={<ErrorPage />} />
-            </Route>
-        </Routes>
+                            //  </PrivateRoute>
+                        }
+                    />
+                    <Route path="*" element={<ErrorPage />} />
+                </Route>
+            </Routes>
         </ThemeProvider>
     );
 };
