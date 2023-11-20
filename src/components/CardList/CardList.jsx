@@ -1,3 +1,5 @@
+import LinearProgress from '@mui/material/LinearProgress';
+import Stack from '@mui/material/Stack';
 import Card from '../Card/Card';
 import css from './CardList.module.css';
 import { useSelector } from 'react-redux';
@@ -7,7 +9,11 @@ const CardList = ({ error, load }) => {
 
     return (
         <>
-            {load && <div>Loading...</div>}
+            {load && (
+                <Stack sx={{ width: '100%', color: 'green.500' }} spacing={2}>
+                    <LinearProgress color="success" />
+                </Stack>
+            )}
             {error && <div>{error}</div>}
 
             <ul className={css.CardList}>
