@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +15,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
+import {
+    filteredNavItemsBeforeLoading,
+    filteredNavItemsAfterLoading,
+} from '../../helpers/headerNavEl';
 
 const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,15 +26,10 @@ const Header = () => {
 
     const drawerWidth = 240;
 
-    const navItems = [
-        { label: 'Головна', path: '/' },
-        { label: 'Вхід', path: '/login' },
-        { label: 'Реєстрація', path: '/register' },
-        { label: 'Ігри', path: '/games' },
-    ];
-    const filteredNavItems = isLoggedIn
-    ? navItems
-    : navItems.filter(item => item.label === 'Головна' || item.label === 'Вхід'|| item.label === 'Реєстрація' )
+    let filteredNavItems = [];
+    isLoggedIn
+        ? (filteredNavItems = filteredNavItemsBeforeLoading)
+        : (filteredNavItems = filteredNavItemsAfterLoading);
 
     const handleDrawerToggle = () => {
         setMobileOpen(prevState => !prevState);
