@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = 'https://miraplay-text-server.onrender.com/api/';
+const BASE_URL = 'https://miraplay-db3b.onrender.com/api/';
 
 export const authApi = createApi({
     reducerPath: 'auth',
